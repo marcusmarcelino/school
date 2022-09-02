@@ -1,0 +1,16 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "endOfLine": "lf",
+  "prettier/prettier": [
+    "error",
+    {
+      "endOfLine": "lf"
+    },
+    "warn",
+    {
+      "singleQuote": true,
+      "endOfLine": "lf"
+    }
+  ]
+}

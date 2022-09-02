@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  api-school:
+    build: .docker/api-school
+    entrypoint: dockerize -wait tcp://db-school:5432 -timeout 40s ./.docker/entrypoint.sh
+    container_name: api-school
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - db-school
+  
+  db-school:
+    build: .docker/postgres
+    container_name: db-school
+    restart: always
+    tty: true
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    ports: 
+     - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=school
+
+networks: 
+  school-network:
+    driver: bridge
+
+volumes:
+  dbdata: {}
